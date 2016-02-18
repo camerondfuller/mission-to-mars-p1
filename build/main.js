@@ -52,8 +52,17 @@
 	var Body = React.createClass({
 	   displayName: 'Body',
 
+
 	   render: function render() {
-	      return React.createElement('div', { className: '.body' });
+	      return React.createElement(
+	         'div',
+	         { className: 'body container' },
+	         React.createElement(
+	            'button',
+	            { type: 'button', className: 'start-btn', ref: 'begin-button' },
+	            'begin evaluation'
+	         )
+	      );
 	   }
 	});
 

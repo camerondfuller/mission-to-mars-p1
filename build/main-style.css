@@ -53,6 +53,9 @@ img {
   box-sizing: border-box;
   outline: none; }
 
+html {
+  overflow: hidden; }
+
 @font-face {
   font-family: 'Open Sans';
   src: url("../fonts/opensans/opensans-light-webfont.eot");
