@@ -1,3 +1,16 @@
-.test {
-   display: flex;
+.body {
+   height: 100vh;
+   width: 100vw;
+   background: linear-gradient(to right, #fd746c, #ff9068);
+}
+.start-btn {
+   border: 2px solid white;
+   text-transform: uppercase;
+   font-size: 1rem;
+   font-weight: bold;
+   background: #EDF1F2;
+   padding: 1rem 4rem;
+   border-radius: 2px;
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+   cursor: pointer;
 }

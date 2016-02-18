@@ -1,14 +1,14 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var Body = React.creatClass({
+var Body = React.createClass({
    render:function() {
-      return <div><p>Hello World</p></div>
+      return (
+         <div className=".body">
+
+         </div>
+      );
    }
 });
 
-
-
-
-
-ReactDOM.render(<Body />, document.querySelector('.mountnode'));
+ReactDOM.render(<Body />, document.querySelector('#mountnode'));

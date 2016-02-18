@@ -49,21 +49,15 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 
-	var Body = React.creatClass({
+	var Body = React.createClass({
+	   displayName: 'Body',
+
 	   render: function render() {
-	      return React.createElement(
-	         'div',
-	         null,
-	         React.createElement(
-	            'p',
-	            null,
-	            'Hello World'
-	         )
-	      );
+	      return React.createElement('div', { className: '.body' });
 	   }
 	});
 
-	ReactDOM.render(React.createElement(Body, null), document.querySelector('.mountnode'));
+	ReactDOM.render(React.createElement(Body, null), document.querySelector('#mountnode'));
 
 /***/ },
 /* 1 */

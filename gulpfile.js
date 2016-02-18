@@ -92,7 +92,7 @@ gulp.task('sass-process', function(){
       });
       gulp.watch(['scss/*.scss'], ['sass-process']);
       gulp.watch('main.jsx', ['compile-react']);
-      gulp.watch(['build/main.js', 'build/*.min.css', 'index.html']).on('change', browserSync.reload);
+      gulp.watch(['build/*.js', 'main.jsx', 'build/*.min.css', 'index.html']).on('change', browserSync.reload);
    });
 
    //End of Declarations --------------------------------------------------------------------------------------------------
