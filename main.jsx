@@ -64,7 +64,7 @@ var Timer = React.createClass({
       this.interval = setInterval(this.tick, 1000);
    },
    displayZero: function() {
-      if(this.state.secondsElapsed < 10) {
+      if(this.state.secondsElapsed === 60 || this.state.secondsElapsed < 10) {
          return '0'
       } else {
          return
@@ -75,7 +75,7 @@ var Timer = React.createClass({
    },
 
    render: function(){
-      return ( <div><span>{this.minutesLeft()}</span>:<span>{this.displayZero}</span><span>{this.secondsLeft()}</span></div>);
+      return ( <div><span>{this.minutesLeft()}</span>:<span>{this.displayZero()}</span><span>{this.secondsLeft()}</span></div>);
    }
 
 });

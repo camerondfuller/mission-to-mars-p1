@@ -123,7 +123,7 @@
 	      this.interval = setInterval(this.tick, 1000);
 	   },
 	   displayZero: function displayZero() {
-	      if (this.state.secondsElapsed < 10) {
+	      if (this.state.secondsElapsed === 60 || this.state.secondsElapsed < 10) {
 	         return '0';
 	      } else {
 	         return;
@@ -146,7 +146,7 @@
 	         React.createElement(
 	            'span',
 	            null,
-	            this.displayZero
+	            this.displayZero()
 	         ),
 	         React.createElement(
 	            'span',
