@@ -53,17 +53,109 @@
 	   displayName: 'Body',
 
 
+	   getInitialState: function getInitialState() {
+	      return {
+	         timerStarted: false
+	      };
+	   },
+
+	   showTimer: function showTimer() {
+	      // press the button and the button disappears as the timer appears and starts counting down. Then run timerEnds().
+	      return;
+	   },
+
+	   timerEnds: function timerEnds() {
+	      // the countdown timer disappears and the original button reappears.
+	      return;
+	   },
+
 	   render: function render() {
 	      return React.createElement(
 	         'div',
 	         { className: 'body container' },
 	         React.createElement(
 	            'button',
-	            { type: 'button', className: 'start-btn', ref: 'begin-button' },
+	            { type: 'button', className: 'start-btn', onClick: this.showTimer },
 	            'begin evaluation'
+	         ),
+	         React.createElement(
+	            'div',
+	            { className: 'timer' },
+	            React.createElement(Timer, { startMinutes: 1 })
 	         )
 	      );
 	   }
+	});
+	var Timer = React.createClass({
+	   displayName: 'Timer',
+
+
+	   getInitialState: function getInitialState() {
+	      var seconds = this.getSeconds();
+
+	      return {
+	         secondsElapsed: seconds
+	      };
+	   },
+	   getSeconds: function getSeconds() {
+	      if (this.props.startMinutes >= 1) {
+	         return this.props.startMinutes * 60;
+	      } else {
+	         return 60;
+	      }
+	   },
+	   secondsLeft: function secondsLeft() {
+	      return Math.floor(this.state.secondsElapsed % 60);
+	   },
+	   stopTimer: function stopTimer() {
+	      clearInterval(this.interval);
+	   },
+	   tick: function tick() {
+	      this.setState({ secondsElapsed: this.state.secondsElapsed - 1 });
+	      if (this.state.secondsElapsed === 0) {
+	         this.stopTimer();
+	      }
+	   },
+	   minutesLeft: function minutesLeft() {
+	      return Math.floor(this.state.secondsElapsed / 60);
+	   },
+	   start: function start() {
+	      this.interval = setInterval(this.tick, 1000);
+	   },
+	   displayZero: function displayZero() {
+	      if (this.state.secondsElapsed < 10) {
+	         return '0';
+	      } else {
+	         return;
+	      }
+	   },
+	   componentDidMount: function componentDidMount() {
+	      setTimeout(this.start, 0);
+	   },
+
+	   render: function render() {
+	      return React.createElement(
+	         'div',
+	         null,
+	         React.createElement(
+	            'span',
+	            null,
+	            this.minutesLeft()
+	         ),
+	         ':',
+	         React.createElement(
+	            'span',
+	            null,
+	            this.displayZero
+	         ),
+	         React.createElement(
+	            'span',
+	            null,
+	            this.secondsLeft()
+	         )
+	      );
+	   }
+
 	});
 
 	ReactDOM.render(React.createElement(Body, null), document.querySelector('#mountnode'));

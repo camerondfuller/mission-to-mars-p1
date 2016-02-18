@@ -65,7 +65,6 @@ gulp.task('sass-process', function(){
          entry: {
             main: './main.jsx'
          },
-         watch:true,
          output: {
             publicPath: '',
             filename: 'main.js'
@@ -92,7 +91,7 @@ gulp.task('sass-process', function(){
       });
       gulp.watch(['scss/*.scss'], ['sass-process']);
       gulp.watch('main.jsx', ['compile-react']);
-      gulp.watch(['build/*.js', 'main.jsx', 'build/*.min.css', 'index.html']).on('change', browserSync.reload);
+      gulp.watch(['build/*.js', 'build/*.min.css', 'index.html']).on('change', browserSync.reload);
    });
 
    //End of Declarations --------------------------------------------------------------------------------------------------
