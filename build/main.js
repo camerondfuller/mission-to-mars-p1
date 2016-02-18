@@ -72,16 +72,16 @@
 	   render: function render() {
 	      return React.createElement(
 	         'div',
-	         { className: 'body container' },
-	         React.createElement(
-	            'button',
-	            { type: 'button', className: 'start-btn', onClick: this.showTimer },
-	            'begin evaluation'
-	         ),
+	         { className: 'body center-child' },
 	         React.createElement(
 	            'div',
 	            { className: 'timer' },
 	            React.createElement(Timer, { startMinutes: 1 })
+	         ),
+	         React.createElement(
+	            'button',
+	            { type: 'button', className: 'start-btn', onClick: this.showTimer },
+	            'begin evaluation'
 	         )
 	      );
 	   }

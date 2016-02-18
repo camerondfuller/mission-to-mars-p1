@@ -17,13 +17,20 @@
    transform: translateX(-75px);
 }
 .timer {
+   display: flex;
+   align-self: flex-end;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
    font-family: 'digital-clock', sans-serif;
    font-size: 4rem;
    color:lightgreen;
    text-shadow: 0 0 2px lime, 0 0 8px rgba(0, 255, 0, 0.5), 0 0 10px rgba(0, 255, 0, 0.8);
-   padding: 1rem 2rem;
    background-color: black;
    border: 2px solid #ff9068;
    border-radius: 2px;
    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+   height: 5rem;
+   width: 8rem;
+   transform: translate(500px, 1rem);
 }

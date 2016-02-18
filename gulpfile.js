@@ -59,21 +59,14 @@ gulp.task('sass-process', function(){
    //This task takes a SASS file, adds vender prefixes, compiles it, minifies it, and stores it in the build/css folder.
 
    gulp.task('compile-react', function() {
-      gulp.src('./**/*.jsx')
+      return gulp.src('./jsx/*.jsx')
       .pipe(plumber())
       .pipe(webpack({
-         entry: {
-            main: './main.jsx'
-         },
-         output: {
-            publicPath: '',
-            filename: 'main.js'
-         },
          module: {
             loaders: [{
                test:/\.jsx?$/,
-               exclude:/(node_modules)/,
-               loader:'babel-loader',
+               exclude: /node_modules/,
+               loader: 'babel-loader',
                query: {
                   presets: ['es2015', 'react']
                }
