@@ -10,11 +10,11 @@ var Body = React.createClass({
          started: false
       };
    },
-   showIfStarted: function() {
-      if(this.state.started === false) {
-         return "timer hidden"
+   hidden: function(shouldHide) {
+      if(this.state.started !== shouldHide) {
+         return "hidden"
       } else {
-         return "timer"
+         return ""
       }
    },
    handleClick: function() {
@@ -25,10 +25,10 @@ var Body = React.createClass({
       return (
 
          <div className="body center-child">
-            <div className={this.showIfStarted()}>
-               <Timer startMinutes={1} />
+            <div className={"timer "+this.hidden(true)}>
+               <Timer startMinutes={1} startHandler={this.state.started} />
             </div>
-            <button type="button" className="start-btn" onClick={this.handleClick}>begin evaluation</button>
+            <button type="button" className={'start-btn '+this.hidden(false)} onClick={this.handleClick}>begin evaluation</button>
 
          </div>
 

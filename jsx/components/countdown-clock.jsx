@@ -43,8 +43,11 @@ var Timer = React.createClass({
          return ;
       }
    },
-   handleClick: function(){
-      this.start();
+   componentWillReceiveProps: function(nextProps){
+      if (nextProps.startHandler === true) {
+         this.start();
+         // button disappears;
+      }
    },
    render: function(){
       return ( <div><span>{this.minutesLeft()}</span>:<span>{this.displayZero()}</span><span>{this.secondsLeft()}</span></div>);
@@ -53,3 +56,8 @@ var Timer = React.createClass({
 });
 
 module.exports = Timer;
+
+
+// if (this.state.started === true) {
+//    this.startClock();
+// };

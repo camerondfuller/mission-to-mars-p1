@@ -24722,11 +24722,11 @@
 	         started: false
 	      };
 	   },
-	   showIfStarted: function showIfStarted() {
-	      if (this.state.started === false) {
-	         return "timer hidden";
+	   hidden: function hidden(shouldHide) {
+	      if (this.state.started !== shouldHide) {
+	         return "hidden";
 	      } else {
-	         return "timer";
+	         return "";
 	      }
 	   },
 	   handleClick: function handleClick() {
@@ -24739,12 +24739,12 @@
 	         { className: 'body center-child' },
 	         React.createElement(
 	            'div',
-	            { className: this.showIfStarted() },
-	            React.createElement(_countdownClock2.default, { startMinutes: 1 })
+	            { className: "timer " + this.hidden(true) },
+	            React.createElement(_countdownClock2.default, { startMinutes: 1, startHandler: this.state.started })
 	         ),
 	         React.createElement(
 	            'button',
-	            { type: 'button', className: 'start-btn', onClick: this.handleClick },
+	            { type: 'button', className: 'start-btn ' + this.hidden(false), onClick: this.handleClick },
 	            'begin evaluation'
 	         )
 	      );
@@ -24804,8 +24804,11 @@
 	         return;
 	      }
 	   },
-	   handleClick: function handleClick() {
-	      this.start();
+	   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.startHandler === true) {
+	         this.start();
+	         // button disappears;
+	      }
 	   },
 	   render: function render() {
 	      return React.createElement(
@@ -24833,6 +24836,10 @@
 	});
 
 	module.exports = Timer;
+
+	// if (this.state.started === true) {
+	//    this.startClock();
+	// };
 
 /***/ },
 /* 217 */
