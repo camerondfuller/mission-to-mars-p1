@@ -13,7 +13,10 @@ var autoprefixer = require('gulp-autoprefixer');
 var webpack = require('webpack-stream');
 var historyApiFallback = require('connect-history-api-fallback');
 
+// Destination Variables -----------------------------------------------------------------------------------------------
 
+var jsxDest ='';
+var cssDest ='';
 
 // End of Variables ----------------------------------------------------------------------------------------------------
 
@@ -97,7 +100,7 @@ gulp.task('copy-html', function() {
       }
       });
       gulp.watch(['scss/*.scss'], ['sass-process']);
-      gulp.watch('main.jsx', ['compile-react']);
+      gulp.watch('./jsx/**/*.jsx', ['compile-react']);
       gulp.watch('index.html', ['copy-html']);
       gulp.watch(['build/*.js', 'build/*.min.css', 'build/index.html']).on('change', browserSync.reload);
    });

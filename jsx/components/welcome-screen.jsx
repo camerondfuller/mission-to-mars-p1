@@ -1,11 +1,26 @@
 var React = require('react');
+var history = require('history');
 
-var NotFound = React.createClass({
+var WelcomeScreen = React.createClass({
+   takeTest: function() {
+      this.prop.history.push('/evaluation');
+   },
    render: function() {
       return (
-         <div>Welcome!</div>
-      )
+         React.createElement(
+            'div',
+            {className:'body center-child'},
+            // <div className="body center-child">
+            //    <button type="button" className="start-btn">Take Test</button>
+            // </div>
+            React.createElement(
+               'button',
+               { className: 'start-btn', onClick: this.takeTest },
+               'Take test'
+            )
+         )
+      );
    }
 });
 
-module.exports = NotFound;
+module.exports = WelcomeScreen;
