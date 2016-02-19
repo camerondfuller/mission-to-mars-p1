@@ -11,6 +11,8 @@ var autoprefixer = require('gulp-autoprefixer');
 // var babel = require('gulp-babel');
 // var browserify = require('gulp-browserify');
 var webpack = require('webpack-stream');
+var historyApiFallback = require('connect-history-api-fallback');
+
 
 
 // End of Variables ----------------------------------------------------------------------------------------------------
@@ -58,10 +60,19 @@ gulp.task('sass-process', function(){
    });
    //This task takes a SASS file, adds vender prefixes, compiles it, minifies it, and stores it in the build/css folder.
 
+gulp.task('copy-html', function() {
+   gulp.src('./index.html')
+   .pipe(gulp.dest('./build'));
+});
+
+// for some reason, compile is not naming the compiled .js to main.js.
    gulp.task('compile-react', function() {
-      return gulp.src('./jsx/*.jsx')
+      gulp.src('./jsx/*.jsx')
       .pipe(plumber())
       .pipe(webpack({
+         output: {
+            filename: 'main.js'
+         },
          module: {
             loaders: [{
                test:/\.jsx?$/,
@@ -80,11 +91,15 @@ gulp.task('sass-process', function(){
    gulp.task('browserSync', ['compile-react'], function() {
 
       browserSync.init({
-         server: './'
+         server: {
+            baseDir:'./',
+         middleware: [historyApiFallback()]
+      }
       });
       gulp.watch(['scss/*.scss'], ['sass-process']);
       gulp.watch('main.jsx', ['compile-react']);
-      gulp.watch(['build/*.js', 'build/*.min.css', 'index.html']).on('change', browserSync.reload);
+      gulp.watch('index.html', ['copy-html']);
+      gulp.watch(['build/*.js', 'build/*.min.css', 'build/index.html']).on('change', browserSync.reload);
    });
 
    //End of Declarations --------------------------------------------------------------------------------------------------

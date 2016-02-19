@@ -1,37 +1,7 @@
+
 var React = require('react');
-var ReactDOM = require('react-dom');
 
-var Body = React.createClass({
 
-   getInitialState: function () {
-      return {
-         timerStarted: false
-      }
-   },
-
-   showTimer: function() {
-      // press the button and the button disappears as the timer appears and starts counting down. Then run timerEnds().
-      return
-   },
-
-   timerEnds: function() {
-      // the countdown timer disappears and the original button reappears.
-      return
-   },
-
-   render: function() {
-      return (
-         <div className="body center-child">
-            <div className="timer">
-               <Timer startMinutes={1} />
-            </div>
-            <button type="button" className="start-btn" onClick={this.showTimer}>begin evaluation</button>
-
-         </div>
-
-      );
-   }
-});
 var Timer = React.createClass({
 
    getInitialState: function(){
@@ -83,4 +53,4 @@ var Timer = React.createClass({
 
 });
 
-ReactDOM.render(<Body />, document.querySelector('#mountnode'));
+module.exports = Timer;
