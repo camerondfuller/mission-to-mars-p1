@@ -1,9 +1,9 @@
 var React = require('react');
-var history = require('history');
+import {browserHistory} from 'react-router';
 
 var WelcomeScreen = React.createClass({
    takeTest: function() {
-      this.prop.history.push('/evaluation');
+      browserHistory.push('/evaluation');
    },
    render: function() {
       return (

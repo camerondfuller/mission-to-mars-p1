@@ -43,9 +43,6 @@ var Timer = React.createClass({
          return ;
       }
    },
-   // componentDidMount: function(){
-   //    this.start();
-   // },
    handleClick: function(){
       this.start();
    },
