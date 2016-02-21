@@ -12,7 +12,7 @@ var Body = React.createClass({
          started: false,
          currentQuestion: 1,
          answerCount: 0,
-         userInput: ''
+         userAnswer: ''
       };
    },
    hidden: function(notHidden) {
@@ -28,7 +28,9 @@ var Body = React.createClass({
    handleSubmit: function(event) {
       event.preventDefault();
       this.setState({currentQuestion: this.state.currentQuestion + 1});
-      this.setState({userInput: event.target.value});
+   },
+   updateUserAnswer: function(e) {
+      this.setState({userAnswer: e.target.value});
    },
    renderQuestion: function() {
       return (
@@ -39,14 +41,14 @@ var Body = React.createClass({
       )
    },
    matchAnswer: function(event) {
-      if(this.state.userInput = questionList.questions[this.state.currentQuestion].answer) {
+      if(this.state.userAnswer == questionList.questions[this.state.currentQuestion].answer) {
       event.preventDefault();
          this.setState({answerCount: this.state.answerCount + 1});
       }
    },
    render: function() {
       return (
-         <div className="body center-child">
+         <div className="body mars center-child">
             <div className={"timer "+this.hidden(true)}>
                <Timer startMinutes={1} startHandler={this.state.started} />
             </div>
@@ -55,7 +57,7 @@ var Body = React.createClass({
             <div className={'question-box'+this.hidden(true)}>
                {this.renderQuestion()}
                <form onSubmit={this.handleSubmit}>
-                  <input className={this.hidden(true)} type="text" ref={this.state.userInput}></input>
+                  <input className={this.hidden(true)} type="text" placeholder="Your Answer" onChange={this.updateUserInputState}></input>
                </form>
             </div>
          </div>

@@ -202,6 +202,13 @@ header {
   width: 100vw;
   background: linear-gradient(to right, #fd746c, #ff9068); }
 
+.mars {
+  background-color: black;
+  background-image: url(images/mars.jpg);
+  opacity: 1;
+  -webkit-animation: fade 1s ease;
+          animation: fade 1s ease; }
+
 .start-btn {
   border: 2px solid white;
   text-transform: uppercase;
@@ -242,6 +249,43 @@ header {
   -webkit-animation: slide 1s alternate;
           animation: slide 1s alternate; }
 
+.question-box {
+  position: relative;
+  color: black;
+  border: 2px solid white;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #EDF1F2;
+  padding: 4rem 10rem;
+  border-radius: 2px;
+  letter-spacing: -1px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  -webkit-transform: translateX(-75px);
+          transform: translateX(-75px); }
+
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid gray; }
+
+.rejected {
+  font-size: 150px;
+  text-transform: uppercase;
+  -webkit-animation: fade .5s alternate infinite;
+          animation: fade .5s alternate infinite;
+  color: red;
+  font-weight: bold; }
+
+.success {
+  font-size: 150px;
+  text-transform: uppercase;
+  -webkit-animation: fade .5s alternate infinite;
+          animation: fade .5s alternate infinite;
+  color: green;
+  font-weight: bold; }
+
 @-webkit-keyframes slide {
   0% {
     right: -100px;
@@ -258,22 +302,14 @@ header {
     right: 1rem;
     opacity: 1; } }
 
-.question-box {
-  position: relative;
-  color: black;
-  border: 2px solid white;
-  text-transform: uppercase;
-  font-size: 1rem;
-  font-weight: bold;
-  background: #EDF1F2;
-  padding: 4rem 10rem;
-  border-radius: 2px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  -webkit-transform: translateX(-75px);
-          transform: translateX(-75px); }
+@-webkit-keyframes fade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
-input {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid gray; }
+@keyframes fade {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }

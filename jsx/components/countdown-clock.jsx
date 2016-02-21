@@ -46,6 +46,11 @@ var Timer = React.createClass({
          return ;
       }
    },
+   rejectApplicant: function() {
+      if(this.state.secondsElapsed === 0) {
+         browserHistory.push('/rejected');
+      }
+   },
    changeToRed: function() {
       if(this.state.secondsElapsed <10) {
          // change color to red.
@@ -65,6 +70,7 @@ var Timer = React.createClass({
       return   (
          <div>
             <span>{this.minutesLeft()}</span>:<span>{this.displayZero()}</span><span>{this.secondsLeft()}</span>
+            {this.rejectApplicant()}
          </div>
       );
    }

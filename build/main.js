@@ -64,10 +64,14 @@
 
 	var _rejected2 = _interopRequireDefault(_rejected);
 
+	var _success = __webpack_require__(220);
+
+	var _success2 = _interopRequireDefault(_success);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var React = __webpack_require__(24);
-	var ReactDOM = __webpack_require__(220);
+	var ReactDOM = __webpack_require__(221);
 
 	var App = React.createClass({
 	   displayName: 'App',
@@ -79,8 +83,9 @@
 	         React.createElement(_reactRouter.Redirect, { from: '/', to: '/welcome' }),
 	         React.createElement(_reactRouter.Route, { path: '/welcome', component: _welcomeScreen2.default }),
 	         React.createElement(_reactRouter.Route, { path: '/evaluation', component: _body2.default }),
-	         React.createElement(_reactRouter.Route, { path: '*', component: _2.default }),
-	         React.createElement(_reactRouter.Route, { path: '/rejected', component: _rejected2.default })
+	         React.createElement(_reactRouter.Route, { path: '/rejected', component: _rejected2.default }),
+	         React.createElement(_reactRouter.Route, { path: '/success', component: _success2.default }),
+	         React.createElement(_reactRouter.Route, { path: '*', component: _2.default })
 	      );
 	   }
 	});
@@ -24732,7 +24737,7 @@
 	         started: false,
 	         currentQuestion: 1,
 	         answerCount: 0,
-	         userInput: ''
+	         userAnswer: ''
 	      };
 	   },
 	   hidden: function hidden(notHidden) {
@@ -24748,7 +24753,9 @@
 	   handleSubmit: function handleSubmit(event) {
 	      event.preventDefault();
 	      this.setState({ currentQuestion: this.state.currentQuestion + 1 });
-	      this.setState({ userInput: event.target.value });
+	   },
+	   updateUserAnswer: function updateUserAnswer(e) {
+	      this.setState({ userAnswer: e.target.value });
 	   },
 	   renderQuestion: function renderQuestion() {
 	      return React.createElement(
@@ -24768,7 +24775,7 @@
 	      );
 	   },
 	   matchAnswer: function matchAnswer(event) {
-	      if (this.state.userInput = questionList.questions[this.state.currentQuestion].answer) {
+	      if (this.state.userAnswer == questionList.questions[this.state.currentQuestion].answer) {
 	         event.preventDefault();
 	         this.setState({ answerCount: this.state.answerCount + 1 });
 	      }
@@ -24776,7 +24783,7 @@
 	   render: function render() {
 	      return React.createElement(
 	         'div',
-	         { className: 'body center-child' },
+	         { className: 'body mars center-child' },
 	         React.createElement(
 	            'div',
 	            { className: "timer " + this.hidden(true) },
@@ -24794,7 +24801,7 @@
 	            React.createElement(
 	               'form',
 	               { onSubmit: this.handleSubmit },
-	               React.createElement('input', { className: this.hidden(true), type: 'text', ref: this.state.userInput })
+	               React.createElement('input', { className: this.hidden(true), type: 'text', placeholder: 'Your Answer', onChange: this.updateUserInputState })
 	            )
 	         )
 	      );
@@ -24880,6 +24887,11 @@
 	         return;
 	      }
 	   },
+	   rejectApplicant: function rejectApplicant() {
+	      if (this.state.secondsElapsed === 0) {
+	         _reactRouter.browserHistory.push('/rejected');
+	      }
+	   },
 	   changeToRed: function changeToRed() {
 	      if (this.state.secondsElapsed < 10) {
 	         // change color to red.
@@ -24914,7 +24926,8 @@
 	            'span',
 	            null,
 	            this.secondsLeft()
-	         )
+	         ),
+	         this.rejectApplicant()
 	      );
 	   }
 
@@ -24962,11 +24975,7 @@
 	      _reactRouter.browserHistory.push('/evaluation');
 	   },
 	   render: function render() {
-	      return React.createElement('div', { className: 'body center-child' },
-	      // <div className="body center-child">
-	      //    <button type="button" className="start-btn">Take Test</button>
-	      // </div>
-	      React.createElement('button', { className: 'start-btn', onClick: this.takeTest }, 'Click if you want to go to MARS!!!'));
+	      return React.createElement('div', { className: 'body center-child' }, React.createElement('button', { className: 'start-btn', onClick: this.takeTest }, 'Click if you want to go to MARS!!!'));
 	   }
 	});
 
@@ -24991,14 +25000,19 @@
 	         state: true
 	      };
 	   },
+	   componentDidMount: function componentDidMount() {
+	      setTimeout(function () {
+	         _reactRouter.browserHistory.push('/welcome');
+	      }, 5000);
+	   },
 	   render: function render() {
 	      return React.createElement(
 	         'div',
-	         null,
+	         { className: 'body mars center-child' },
 	         React.createElement(
 	            'span',
-	            null,
-	            'rejected'
+	            { className: 'rejected' },
+	            'rejected!!!'
 	         )
 	      );
 	   }
@@ -25008,6 +25022,46 @@
 
 /***/ },
 /* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _reactRouter = __webpack_require__(1);
+
+	var React = __webpack_require__(24);
+
+
+	var Success = React.createClass({
+	   displayName: 'Success',
+
+	   getInitialState: function getInitialState() {
+	      return {
+	         state: true
+	      };
+	   },
+	   componentDidMount: function componentDidMount() {
+	      setTimeout(function () {
+	         _reactRouter.browserHistory.push('/welcome');
+	      }, 5000);
+	   },
+
+	   render: function render() {
+	      return React.createElement(
+	         'div',
+	         { className: 'body mars center-child' },
+	         React.createElement(
+	            'span',
+	            { className: 'success' },
+	            'success!!!'
+	         )
+	      );
+	   }
+	});
+
+	module.exports = Success;
+
+/***/ },
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

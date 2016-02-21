@@ -10,9 +10,6 @@ var WelcomeScreen = React.createClass({
          React.createElement(
             'div',
             {className:'body center-child'},
-            // <div className="body center-child">
-            //    <button type="button" className="start-btn">Take Test</button>
-            // </div>
             React.createElement(
                'button',
                { className: 'start-btn', onClick: this.takeTest },

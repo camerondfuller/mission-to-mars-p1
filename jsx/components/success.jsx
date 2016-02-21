@@ -1,7 +1,7 @@
 var React = require('react');
 import {browserHistory} from 'react-router';
 
-var Rejected = React.createClass({
+var Success = React.createClass({
    getInitialState: function() {
       return {
          state: true
@@ -11,13 +11,14 @@ var Rejected = React.createClass({
       setTimeout(function() {
          browserHistory.push('/welcome')}, 5000)
    },
+
    render: function() {
       return (
             <div className="body mars center-child">
-               <span className="rejected">rejected!!!</span>
+               <span className="success">success!!!</span>
             </div>
       );
    }
 });
 
-module.exports = Rejected;
+module.exports = Success;
