@@ -12,7 +12,8 @@ var Body = React.createClass({
          started: false,
          currentQuestion: 1,
          answerCount: 0,
-         userAnswer: ''
+         userAnswer: '',
+         wrongAnswers: 0
       };
    },
    hidden: function(notHidden) {
@@ -20,6 +21,14 @@ var Body = React.createClass({
          return "hidden"
       } else {
          return ""
+      }
+   },
+   results:function() {
+      if(this.state.answerCount === 3) {
+         browserHistory.push('./success');
+      };
+      if(this.state.wrongAnswers === 3) {
+         browserHistory.push('./rejected')
       }
    },
    handleClick: function() {
@@ -41,10 +50,13 @@ var Body = React.createClass({
       )
    },
    matchAnswer: function(event) {
-      if(this.state.userAnswer == questionList.questions[this.state.currentQuestion].answer) {
-      event.preventDefault();
+      if(this.state.userAnswer === questionList.questions[this.state.currentQuestion].answer) {
+         event.preventDefault();
          this.setState({answerCount: this.state.answerCount + 1});
-      }
+      } else {
+         this.setState({wrongAnswers: this.state.wrongAnswers + 1});
+      };
+      this.handleSubmit(event);
    },
    render: function() {
       return (
@@ -56,8 +68,9 @@ var Body = React.createClass({
 
             <div className={'question-box'+this.hidden(true)}>
                {this.renderQuestion()}
-               <form onSubmit={this.handleSubmit}>
-                  <input className={this.hidden(true)} type="text" placeholder="Your Answer" onChange={this.updateUserInputState}></input>
+               {this.results()}
+               <form onSubmit={this.handleSubmit, this.matchAnswer}>
+                  <input className={this.hidden(true)} type="text" placeholder="Your Answer" onChange={this.updateUserAnswer}></input>
                </form>
             </div>
          </div>
@@ -69,19 +82,24 @@ var questionList = {
    questions:{
       1:{
          text: "What is your favorite color?",
-         answer:"Red",
+         answer:"red",
          number:"1"
       },
       2:{
          text:"What is the third planet from the sun?",
-         answer:"Earth",
+         answer:"earth",
          number:"2"
 
       },
       3:{
          text:"Who is the greatest?",
-         answer:"Cameron",
+         answer:"cameron",
          number:"3"
+      },
+      4:{
+         text:"",
+         answer:"",
+         number:4
       }
    }
 };

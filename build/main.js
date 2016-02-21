@@ -24737,7 +24737,8 @@
 	         started: false,
 	         currentQuestion: 1,
 	         answerCount: 0,
-	         userAnswer: ''
+	         userAnswer: '',
+	         wrongAnswers: 0
 	      };
 	   },
 	   hidden: function hidden(notHidden) {
@@ -24745,6 +24746,14 @@
 	         return "hidden";
 	      } else {
 	         return "";
+	      }
+	   },
+	   results: function results() {
+	      if (this.state.answerCount === 3) {
+	         _reactRouter.browserHistory.push('./success');
+	      };
+	      if (this.state.wrongAnswers === 3) {
+	         _reactRouter.browserHistory.push('./rejected');
 	      }
 	   },
 	   handleClick: function handleClick() {
@@ -24775,10 +24784,13 @@
 	      );
 	   },
 	   matchAnswer: function matchAnswer(event) {
-	      if (this.state.userAnswer == questionList.questions[this.state.currentQuestion].answer) {
+	      if (this.state.userAnswer === questionList.questions[this.state.currentQuestion].answer) {
 	         event.preventDefault();
 	         this.setState({ answerCount: this.state.answerCount + 1 });
-	      }
+	      } else {
+	         this.setState({ wrongAnswers: this.state.wrongAnswers + 1 });
+	      };
+	      this.handleSubmit(event);
 	   },
 	   render: function render() {
 	      return React.createElement(
@@ -24798,10 +24810,11 @@
 	            'div',
 	            { className: 'question-box' + this.hidden(true) },
 	            this.renderQuestion(),
+	            this.results(),
 	            React.createElement(
 	               'form',
-	               { onSubmit: this.handleSubmit },
-	               React.createElement('input', { className: this.hidden(true), type: 'text', placeholder: 'Your Answer', onChange: this.updateUserInputState })
+	               { onSubmit: (this.handleSubmit, this.matchAnswer) },
+	               React.createElement('input', { className: this.hidden(true), type: 'text', placeholder: 'Your Answer', onChange: this.updateUserAnswer })
 	            )
 	         )
 	      );
@@ -24812,19 +24825,24 @@
 	   questions: {
 	      1: {
 	         text: "What is your favorite color?",
-	         answer: "Red",
+	         answer: "red",
 	         number: "1"
 	      },
 	      2: {
 	         text: "What is the third planet from the sun?",
-	         answer: "Earth",
+	         answer: "earth",
 	         number: "2"
 
 	      },
 	      3: {
 	         text: "Who is the greatest?",
-	         answer: "Cameron",
+	         answer: "cameron",
 	         number: "3"
+	      },
+	      4: {
+	         text: "",
+	         answer: "",
+	         number: 4
 	      }
 	   }
 	};
@@ -25050,7 +25068,13 @@
 	         'div',
 	         { className: 'body mars center-child' },
 	         React.createElement(
-	            'span',
+	            'div',
+	            null,
+	            React.createElement('i', { className: 'fa fa-space-shuttle takeoff' }),
+	            React.createElement('i', { className: 'fa fa-fire fire fire2 takeoff' })
+	         ),
+	         React.createElement(
+	            'div',
 	            { className: 'success' },
 	            'success!!!'
 	         )

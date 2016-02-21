@@ -79,6 +79,22 @@ input {
    color: green;
    font-weight: bold;
 }
+.takeoff {
+   position: absolute;
+   font-size: 150px;
+   animation: takeoff 4s ease;
+   top:-200px;
+   left:50%;
+   transform: rotate(270deg);
+}
+.fire {
+   color:red;
+   transform: rotate(180deg);
+   animation: fade .2s alternate infinite;
+}
+.fire2 {
+   animation: scale .3s alternate infinite;
+}
 @keyframes slide {
    0% {
       right:-100px;
@@ -95,5 +111,21 @@ input {
    }
    100% {
       opacity: 1;
+   }
+}
+@keyframes takeoff {
+   0% {
+      top:1500px
+   }
+   100% {
+      top:-200px;
+   }
+}
+@keyframes scale {
+   0% {
+      transform: scale(1,1);
+   }
+   100% {
+      transform: scale(2,2);
    }
 }

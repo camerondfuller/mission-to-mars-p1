@@ -286,6 +286,27 @@ input {
   color: green;
   font-weight: bold; }
 
+.takeoff {
+  position: absolute;
+  font-size: 150px;
+  -webkit-animation: takeoff 4s ease;
+          animation: takeoff 4s ease;
+  top: -200px;
+  left: 50%;
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg); }
+
+.fire {
+  color: red;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  -webkit-animation: fade .2s alternate infinite;
+          animation: fade .2s alternate infinite; }
+
+.fire2 {
+  -webkit-animation: scale .3s alternate infinite;
+          animation: scale .3s alternate infinite; }
+
 @-webkit-keyframes slide {
   0% {
     right: -100px;
@@ -313,3 +334,31 @@ input {
     opacity: 0; }
   100% {
     opacity: 1; } }
+
+@-webkit-keyframes takeoff {
+  0% {
+    top: 1500px; }
+  100% {
+    top: -200px; } }
+
+@keyframes takeoff {
+  0% {
+    top: 1500px; }
+  100% {
+    top: -200px; } }
+
+@-webkit-keyframes scale {
+  0% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); }
+  100% {
+    -webkit-transform: scale(2, 2);
+            transform: scale(2, 2); } }
+
+@keyframes scale {
+  0% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); }
+  100% {
+    -webkit-transform: scale(2, 2);
+            transform: scale(2, 2); } }
