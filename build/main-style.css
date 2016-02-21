@@ -58,64 +58,64 @@ html {
 
 @font-face {
   font-family: 'Open Sans';
-  src: url("../fonts/opensans/opensans-light-webfont.eot");
-  src: url("../fonts/opensans/opensans-light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/opensans/opensans-light-webfont.woff") format("woff"), url("../fonts/opensans/opensans-light-webfont.ttf") format("truetype"), url("../fonts/opensans/opensans-light-webfont.svg#robotoregular") format("svg");
+  src: url("fonts/opensans/opensans-light-webfont.eot");
+  src: url("fonts/opensans/opensans-light-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/opensans/opensans-light-webfont.woff") format("woff"), url("fonts/opensans/opensans-light-webfont.ttf") format("truetype"), url("fonts/opensans/opensans-light-webfont.svg#robotoregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url("../fonts/opensans/opensans-bolditalic-webfont.eot");
-  src: url("../fonts/opensans/opensans-bolditalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/opensans/opensans-bolditalic-webfont.woff") format("woff"), url("../fonts/opensans/opensans-bolditalic-webfont.ttf") format("truetype"), url("../fonts/opensans/opensans-bolditalic-webfont.svg#robotoregular") format("svg");
+  src: url("fonts/opensans/opensans-bolditalic-webfont.eot");
+  src: url("fonts/opensans/opensans-bolditalic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/opensans/opensans-bolditalic-webfont.woff") format("woff"), url("fonts/opensans/opensans-bolditalic-webfont.ttf") format("truetype"), url("fonts/opensans/opensans-bolditalic-webfont.svg#robotoregular") format("svg");
   font-weight: bold;
   font-style: italic; }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url("../fonts/opensans/opensans-bold-webfont.eot");
-  src: url("../fonts/opensans/opensans-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/opensans/opensans-bold-webfont.woff") format("woff"), url("../fonts/opensans/opensans-bold-webfont.ttf") format("truetype"), url("../fonts/opensans/opensans-bold-webfont.svg#robotoregular") format("svg");
+  src: url("fonts/opensans/opensans-bold-webfont.eot");
+  src: url("fonts/opensans/opensans-bold-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/opensans/opensans-bold-webfont.woff") format("woff"), url("fonts/opensans/opensans-bold-webfont.ttf") format("truetype"), url("fonts/opensans/opensans-bold-webfont.svg#robotoregular") format("svg");
   font-weight: bold;
   font-style: normal; }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url("../fonts/opensans/opensans-lightitalic-webfont.eot");
-  src: url("../fonts/opensans/opensans-lightitalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/opensans/opensans-lightitalic-webfont.woff") format("woff"), url("../fonts/opensans/opensans-lightitalic-webfont.ttf") format("truetype"), url("../fonts/opensans/opensans-lightitalic-webfont.svg#robotoregular") format("svg");
+  src: url("fonts/opensans/opensans-lightitalic-webfont.eot");
+  src: url("fonts/opensans/opensans-lightitalic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/opensans/opensans-lightitalic-webfont.woff") format("woff"), url("fonts/opensans/opensans-lightitalic-webfont.ttf") format("truetype"), url("fonts/opensans/opensans-lightitalic-webfont.svg#robotoregular") format("svg");
   font-weight: normal;
   font-style: italic; }
 
 @font-face {
   font-family: 'font-awesome';
-  src: url("../fonts/font-awesome/fontawesome-webfont.eot");
-  src: url("../fonts/font-awesome/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/font-awesome/fontawesome-webfont.woff") format("woff"), url("../fonts/font-awesome/fontawesome-webfont.ttf") format("truetype"), url("../fonts/font-awesome/fontawesome.svg#robotoregular") format("svg");
+  src: url("fonts/font-awesome/fontawesome-webfont.eot");
+  src: url("fonts/font-awesome/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/font-awesome/fontawesome-webfont.woff") format("woff"), url("fonts/font-awesome/fontawesome-webfont.ttf") format("truetype"), url("fonts/font-awesome/fontawesome.svg#robotoregular") format("svg");
   font-weight: normal;
   font-style: italic; }
 
 @font-face {
   font-family: 'digital-clock';
-  src: url("../fonts/digital-clock/digital-clock-normal-webfont.eot");
-  src: url("../fonts/digital-clock/digital-clock-normal-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/digital-clock/digital-clock-normal-webfont.woff") format("woff"), url("../fonts/digital-clock/digital-clock-normal-webfont.ttf") format("truetype"), url("../fonts/digital-clock/digital-clock-normal-webfont.svg#robotoregular") format("svg");
+  src: url("fonts/digital-clock/digital-clock-normal-webfont.eot");
+  src: url("fonts/digital-clock/digital-clock-normal-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/digital-clock/digital-clock-normal-webfont.woff") format("woff"), url("fonts/digital-clock/digital-clock-normal-webfont.ttf") format("truetype"), url("fonts/digital-clock/digital-clock-normal-webfont.svg#robotoregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'digital-clock';
-  src: url("../fonts/digital-clock/digital-clock-bold-italic-webfont.eot");
-  src: url("../fonts/digital-clock/digital-clock-bold-italic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/digital-clock/digital-clock-bold-italic-webfont.woff") format("woff"), url("../fonts/digital-clock/digital-clock-bold-italic-webfont.ttf") format("truetype"), url("../fonts/digital-clock/digital-clock-bold-italic-webfont.svg#robotoregular") format("svg");
+  src: url("fonts/digital-clock/digital-clock-bold-italic-webfont.eot");
+  src: url("fonts/digital-clock/digital-clock-bold-italic-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/digital-clock/digital-clock-bold-italic-webfont.woff") format("woff"), url("fonts/digital-clock/digital-clock-bold-italic-webfont.ttf") format("truetype"), url("fonts/digital-clock/digital-clock-bold-italic-webfont.svg#robotoregular") format("svg");
   font-weight: bold;
   font-style: italic; }
 
 @font-face {
   font-family: 'digital-clock';
-  src: url("../fonts/digital-clock/digital-clock-bold-webfont.eot");
-  src: url("../fonts/digital-clock/digital-clock-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/digital-clock/digital-clock-bold-webfont.woff") format("woff"), url("../fonts/digital-clock/digital-clock-bold-webfont.ttf") format("truetype"), url("../fonts/digital-clock/digital-clock-bold-webfont.svg#robotoregular") format("svg");
+  src: url("fonts/digital-clock/digital-clock-bold-webfont.eot");
+  src: url("fonts/digital-clock/digital-clock-bold-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/digital-clock/digital-clock-bold-webfont.woff") format("woff"), url("fonts/digital-clock/digital-clock-bold-webfont.ttf") format("truetype"), url("fonts/digital-clock/digital-clock-bold-webfont.svg#robotoregular") format("svg");
   font-weight: bold;
   font-style: normal; }
 
 @font-face {
   font-family: 'digital-clock';
-  src: url("../fonts/digital-clock/digital-clock-italics-webfont.eot");
-  src: url("../fonts/digital-clock/digital-clock-italics-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/digital-clock/digital-clock-italics-webfont.woff") format("woff"), url("../fonts/digital-clock/digital-clock-italics-webfont.ttf") format("truetype"), url("../fonts/digital-clock/digital-clock-italics-webfont.svg#robotoregular") format("svg");
+  src: url("fonts/digital-clock/digital-clock-italics-webfont.eot");
+  src: url("fonts/digital-clock/digital-clock-italics-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/digital-clock/digital-clock-italics-webfont.woff") format("woff"), url("fonts/digital-clock/digital-clock-italics-webfont.ttf") format("truetype"), url("fonts/digital-clock/digital-clock-italics-webfont.svg#robotoregular") format("svg");
   font-weight: normal;
   font-style: italic; }
 
@@ -143,6 +143,9 @@ body {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center; }
+
+.hidden, .timer.hidden {
+  display: none; }
 
 header {
   display: -webkit-flex;
@@ -217,9 +220,6 @@ header {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-self: flex-end;
-      -ms-flex-item-align: end;
-          align-self: flex-end;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -237,30 +237,43 @@ header {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   height: 5rem;
   width: 8rem;
-  -webkit-transform: translate(300px, 1rem);
-          transform: translate(300px, 1rem);
+  top: 1rem;
+  right: 1rem;
   -webkit-animation: slide 1s alternate;
           animation: slide 1s alternate; }
 
 @-webkit-keyframes slide {
   0% {
-    -webkit-transform: translate(700px, 1rem);
-            transform: translate(700px, 1rem);
+    right: -100px;
     opacity: 0; }
   100% {
-    -webkit-transform: translate(300px, 1rem);
-            transform: translate(300px, 1rem);
+    right: 1rem;
     opacity: 1; } }
 
 @keyframes slide {
   0% {
-    -webkit-transform: translate(700px, 1rem);
-            transform: translate(700px, 1rem);
+    right: -100px;
     opacity: 0; }
   100% {
-    -webkit-transform: translate(300px, 1rem);
-            transform: translate(300px, 1rem);
+    right: 1rem;
     opacity: 1; } }
 
-.hidden {
-  display: none; }
+.question-box {
+  position: relative;
+  color: black;
+  border: 2px solid white;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #EDF1F2;
+  padding: 4rem 10rem;
+  border-radius: 2px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  -webkit-transform: translateX(-75px);
+          transform: translateX(-75px); }
+
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid gray; }

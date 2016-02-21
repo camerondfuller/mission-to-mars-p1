@@ -2,6 +2,7 @@ import {Router, Route, browserHistory, Redirect } from 'react-router';
 import Body from './components/body.jsx';
 import NotFound from './components/404.jsx'
 import WelcomeScreen from './components/welcome-screen.jsx'
+import Rejected from './components/rejected.jsx'
 
 
 var React = require('react');
@@ -17,6 +18,7 @@ var App = React.createClass({
             <Route path='/welcome' component={WelcomeScreen} />
             <Route path='/evaluation' component={Body}/>
             <Route path='*' component={NotFound}/>
+            <Route path='/rejected' component={Rejected}/>
 
          </Router>
       );

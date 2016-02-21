@@ -16,7 +16,7 @@ var WelcomeScreen = React.createClass({
             React.createElement(
                'button',
                { className: 'start-btn', onClick: this.takeTest },
-               'Take test'
+               'Click if you want to go to MARS!!!'
             )
          )
       );

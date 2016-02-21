@@ -1,5 +1,6 @@
 
 var React = require('react');
+import {browserHistory} from 'react-router';
 
 
 var Timer = React.createClass({
@@ -34,7 +35,9 @@ var Timer = React.createClass({
       return  Math.floor(this.state.secondsElapsed/60);
    },
    start:function (){
-      this.interval = setInterval(this.tick, 1000);
+      if(!this.interval) {
+         this.interval = setInterval(this.tick, 1000);
+      }
    },
    displayZero: function() {
       if(this.state.secondsElapsed === 60 || this.state.secondsElapsed < 10) {
@@ -43,21 +46,29 @@ var Timer = React.createClass({
          return ;
       }
    },
+   changeToRed: function() {
+      if(this.state.secondsElapsed <10) {
+         // change color to red.
+      }
+   },
+   timerEnds: function() {
+      if(this.secondsLeft === 0) {
+         browserHistory.push('/rejected')
+      }
+   },
    componentWillReceiveProps: function(nextProps){
       if (nextProps.startHandler === true) {
          this.start();
-         // button disappears;
-      }
+      };
    },
    render: function(){
-      return ( <div><span>{this.minutesLeft()}</span>:<span>{this.displayZero()}</span><span>{this.secondsLeft()}</span></div>);
+      return   (
+         <div>
+            <span>{this.minutesLeft()}</span>:<span>{this.displayZero()}</span><span>{this.secondsLeft()}</span>
+         </div>
+      );
    }
 
 });
 
 module.exports = Timer;
-
-
-// if (this.state.started === true) {
-//    this.startClock();
-// };

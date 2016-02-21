@@ -53,6 +53,7 @@ var cssDest ='';
 
 gulp.task('sass-process', function(){
    gulp.src('./scss/main-style.scss')
+   .pipe(plumber())
    .pipe(sass())
    .pipe(autoprefixer({
       browsers: ['last 2 versions']}))
@@ -95,7 +96,7 @@ gulp.task('copy-html', function() {
 
       browserSync.init({
          server: {
-            baseDir:'./',
+            baseDir:'./build',
          middleware: [historyApiFallback()]
       }
       });
