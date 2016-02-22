@@ -3,8 +3,6 @@ import {browserHistory} from 'react-router';
 
 import Timer from './countdown-clock.jsx';
 
-var userInput = '';
-
 var Body = React.createClass({
 
    getInitialState: function() {
@@ -12,7 +10,6 @@ var Body = React.createClass({
          started: false,
          currentQuestion: 1,
          rightAnswers: 0,
-         wrongAnswers: 0,
          userAnswer: '',
          value: ''
       };
@@ -28,9 +25,9 @@ var Body = React.createClass({
       if(this.state.rightAnswers === 3) {
          browserHistory.push('/success');
       };
-      if(this.state.wrongAnswers === 3) {
+      if(this.state.currentQuestion > 3 && this.state.rightAnswers != 3) {
          browserHistory.push('/rejected');
-      }
+      };
    },
    handleClick: function() {
       this.setState({ started: true });
@@ -61,9 +58,6 @@ var Body = React.createClass({
       this.refs.reset.value='';
 
    },
-   onTimeFinished(){
-      browserHistory.push('/rejected');
-   },
    render: function() {
       return (
          <div className="body mars center-child">
@@ -74,15 +68,17 @@ var Body = React.createClass({
             </div>
             <button  type="button"
                      className={'start-btn '+this.hidden(false)}
-                     onClick={this.handleClick}>begin evaluation
+                     onClick={this.handleClick}>
+                     begin evaluation
             </button>
 
             <div className={'question-box'+this.hidden(true)}>
 
                {this.renderQuestion()}
-               
-               <form onSubmit={this.onMatchAnswer}>
+
+               <form name="questionForm" onSubmit={this.onMatchAnswer}>
                   <input   className={this.hidden(true)}
+                           name="text-area"
                            ref="reset"
                            type="text"
                            placeholder="Your Answer"
@@ -97,7 +93,7 @@ var Body = React.createClass({
 
 var questionList = {
    questions:{
-      1:{
+      1     :{
          text: "What is your favorite color?",
          answer:"red",
          number:"1"

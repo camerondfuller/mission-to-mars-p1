@@ -24726,8 +24726,6 @@
 	var React = __webpack_require__(24);
 
 
-	var userInput = '';
-
 	var Body = React.createClass({
 	   displayName: 'Body',
 
@@ -24737,7 +24735,6 @@
 	         started: false,
 	         currentQuestion: 1,
 	         rightAnswers: 0,
-	         wrongAnswers: 0,
 	         userAnswer: '',
 	         value: ''
 	      };
@@ -24753,9 +24750,9 @@
 	      if (this.state.rightAnswers === 3) {
 	         _reactRouter.browserHistory.push('/success');
 	      };
-	      if (this.state.wrongAnswers === 3) {
+	      if (this.state.currentQuestion > 3 && this.state.rightAnswers != 3) {
 	         _reactRouter.browserHistory.push('/rejected');
-	      }
+	      };
 	   },
 	   handleClick: function handleClick() {
 	      this.setState({ started: true });
@@ -24794,10 +24791,6 @@
 	      this.handleSubmit(event);
 	      this.refs.reset.value = '';
 	   },
-	   onTimeFinished: function onTimeFinished() {
-	      _reactRouter.browserHistory.push('/rejected');
-	   },
-
 	   render: function render() {
 	      return React.createElement(
 	         'div',
@@ -24822,8 +24815,9 @@
 	            this.renderQuestion(),
 	            React.createElement(
 	               'form',
-	               { onSubmit: this.onMatchAnswer },
+	               { name: 'questionForm', onSubmit: this.onMatchAnswer },
 	               React.createElement('input', { className: this.hidden(true),
+	                  name: 'text-area',
 	                  ref: 'reset',
 	                  type: 'text',
 	                  placeholder: 'Your Answer',
@@ -24918,9 +24912,9 @@
 	         return;
 	      }
 	   },
-	   componentWillUpdate: function componentWillUpdate(prevProps, prevState) {
+	   onTimerFinishedOut: function onTimerFinishedOut() {
 	      if (this.state.secondsElapsed === 0) {
-	         this.props.onTimeFinished();
+	         _reactRouter.browserHistory.push('/rejected');
 	      }
 	   },
 	   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -24947,7 +24941,8 @@
 	            'span',
 	            null,
 	            this.secondsLeft()
-	         )
+	         ),
+	         this.onTimerFinishedOut()
 	      );
 	   }
 

@@ -46,9 +46,9 @@ var Timer = React.createClass({
          return ;
       }
    },
-   componentWillUpdate: function(prevProps, prevState) {
+   onTimerFinishedOut: function() {
       if(this.state.secondsElapsed === 0) {
-         this.props.onTimeFinished();
+         browserHistory.push('/rejected');
       }
    },
    componentWillReceiveProps: function(nextProps){
@@ -60,6 +60,7 @@ var Timer = React.createClass({
       return   (
          <div>
             <span>{this.minutesLeft()}</span>:<span>{this.displayZero()}</span><span >{this.secondsLeft()}</span>
+            {this.onTimerFinishedOut()}
          </div>
       );
    }
