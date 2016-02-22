@@ -15,8 +15,8 @@ var Success = React.createClass({
    render: function() {
       return (
             <div className="body mars center-child">
-               <div><i className="fa fa-space-shuttle takeoff"></i><i className="fa fa-fire fire fire2 takeoff"></i></div>
                <div className="success">success!!!</div>
+               <i className="fa fa-space-shuttle takeoff"></i>
             </div>
       );
    }

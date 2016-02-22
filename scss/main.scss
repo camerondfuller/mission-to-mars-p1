@@ -28,18 +28,18 @@
    align-items: center;
    position: absolute;
    font-family: 'digital-clock', sans-serif;
-   font-size: 4rem;
+   font-size: 3rem;
    color:lightgreen;
-   text-shadow: 0 0 2px lime, 0 0 8px rgba(0, 255, 0, 0.5), 0 0 10px rgba(0, 255, 0, 0.8);
+   text-shadow: 0 0 3px lime, 0 0 8px rgba(0, 255, 0, 0.5), 0 0 10px rgba(0, 255, 0, 0.3);
    background-color: black;
    border: 2px solid #ff9068;
-   border-radius: 2px;
-   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-   height: 5rem;
+   border-radius: 15px;
+   box-shadow: 0 0 50px 15px rgba(255, 255, 255, 0.3);
+   height: 3rem;
    width: 8rem;
-   top:1rem;
-   right:1rem;
-   animation: slide 1s alternate;
+   top:3rem;
+   right:3rem;
+   animation: slide 1s;
 
    &.hidden {
       @extend .hidden;
@@ -49,16 +49,17 @@
    position: relative;
    color:black;
    border: 2px solid white;
+   border-radius: 15px;
+   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
    text-transform: uppercase;
    font-size: 1rem;
    font-weight: bold;
    background: #EDF1F2;
-   padding: 4rem 10rem;
-   border-radius: 2px;
+   padding: 2rem 5rem;
    letter-spacing: -1px;
-   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
    cursor: pointer;
    transform: translateX(-75px);
+   animation: fade .7s ease;
 }
 input {
    background: transparent;
@@ -78,6 +79,7 @@ input {
    animation: fade .5s alternate infinite;
    color: green;
    font-weight: bold;
+   transform: translateX(-60px);
 }
 .takeoff {
    position: absolute;
@@ -87,21 +89,13 @@ input {
    left:50%;
    transform: rotate(270deg);
 }
-.fire {
-   color:red;
-   transform: rotate(180deg);
-   animation: fade .2s alternate infinite;
-}
-.fire2 {
-   animation: scale .3s alternate infinite;
-}
 @keyframes slide {
    0% {
       right:-100px;
       opacity: 0;
    }
    100% {
-      right:1rem;
+      right:3rem;
       opacity: 1;
    }
 }
@@ -119,13 +113,5 @@ input {
    }
    100% {
       top:-200px;
-   }
-}
-@keyframes scale {
-   0% {
-      transform: scale(1,1);
-   }
-   100% {
-      transform: scale(2,2);
    }
 }

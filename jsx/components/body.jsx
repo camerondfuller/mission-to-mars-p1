@@ -11,9 +11,10 @@ var Body = React.createClass({
       return {
          started: false,
          currentQuestion: 1,
-         answerCount: 0,
+         rightAnswers: 0,
+         wrongAnswers: 0,
          userAnswer: '',
-         wrongAnswers: 0
+         value: ''
       };
    },
    hidden: function(notHidden) {
@@ -23,12 +24,12 @@ var Body = React.createClass({
          return ""
       }
    },
-   results:function() {
-      if(this.state.answerCount === 3) {
-         browserHistory.push('./success');
+   componentDidUpdate:function() {
+      if(this.state.rightAnswers === 3) {
+         browserHistory.push('/success');
       };
       if(this.state.wrongAnswers === 3) {
-         browserHistory.push('./rejected')
+         browserHistory.push('/rejected');
       }
    },
    handleClick: function() {
@@ -49,28 +50,44 @@ var Body = React.createClass({
          </div>
       )
    },
-   matchAnswer: function(event) {
+   onMatchAnswer: function(event) {
       if(this.state.userAnswer === questionList.questions[this.state.currentQuestion].answer) {
          event.preventDefault();
-         this.setState({answerCount: this.state.answerCount + 1});
+         this.setState({rightAnswers: this.state.rightAnswers + 1});
       } else {
          this.setState({wrongAnswers: this.state.wrongAnswers + 1});
       };
       this.handleSubmit(event);
+      this.refs.reset.value='';
+
+   },
+   onTimeFinished(){
+      browserHistory.push('/rejected');
    },
    render: function() {
       return (
          <div className="body mars center-child">
             <div className={"timer "+this.hidden(true)}>
-               <Timer startMinutes={1} startHandler={this.state.started} />
+               <Timer   startMinutes={1}
+                        startHandler={this.state.started}
+                        onTimeFinished={this.onTimeFinished}/>
             </div>
-            <button type="button" className={'start-btn '+this.hidden(false)} onClick={this.handleClick}>begin evaluation</button>
+            <button  type="button"
+                     className={'start-btn '+this.hidden(false)}
+                     onClick={this.handleClick}>begin evaluation
+            </button>
 
             <div className={'question-box'+this.hidden(true)}>
+
                {this.renderQuestion()}
-               {this.results()}
-               <form onSubmit={this.handleSubmit, this.matchAnswer}>
-                  <input className={this.hidden(true)} type="text" placeholder="Your Answer" onChange={this.updateUserAnswer}></input>
+               
+               <form onSubmit={this.onMatchAnswer}>
+                  <input   className={this.hidden(true)}
+                           ref="reset"
+                           type="text"
+                           placeholder="Your Answer"
+                           onChange={this.updateUserAnswer}>
+                  </input>
                </form>
             </div>
          </div>

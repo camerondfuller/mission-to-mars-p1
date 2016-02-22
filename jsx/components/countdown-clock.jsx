@@ -9,7 +9,7 @@ var Timer = React.createClass({
       var seconds = this.getSeconds();
 
       return {
-         secondsElapsed: seconds
+         secondsElapsed: seconds,
       };
    },
    getSeconds: function() {
@@ -19,24 +19,24 @@ var Timer = React.createClass({
          return 60;
       }
    },
-   secondsLeft: function(){
-      return Math.floor(this.state.secondsElapsed%60);
-   },
-   stopTimer: function(){
-      clearInterval(this.interval);
-   },
-   tick: function(){
-      this.setState({secondsElapsed: this.state.secondsElapsed - 1});
-      if(this.state.secondsElapsed === 0){
-         this.stopTimer();
-      }
-   },
    minutesLeft: function() {
       return  Math.floor(this.state.secondsElapsed/60);
    },
+   secondsLeft: function(){
+      return Math.floor(this.state.secondsElapsed%60);
+   },
+   componentWillUnmount: function(){
+      clearInterval(this.interval);
+   },
+   _decrementByOne: function(){
+      this.setState({secondsElapsed: this.state.secondsElapsed - 1});
+      if(this.state.secondsElapsed === 0){
+         this.componentWillUnmount();
+      }
+   },
    start:function (){
       if(!this.interval) {
-         this.interval = setInterval(this.tick, 1000);
+         this.interval = setInterval(this._decrementByOne, 1000);
       }
    },
    displayZero: function() {
@@ -46,19 +46,9 @@ var Timer = React.createClass({
          return ;
       }
    },
-   rejectApplicant: function() {
+   componentWillUpdate: function(prevProps, prevState) {
       if(this.state.secondsElapsed === 0) {
-         browserHistory.push('/rejected');
-      }
-   },
-   changeToRed: function() {
-      if(this.state.secondsElapsed <10) {
-         // change color to red.
-      }
-   },
-   timerEnds: function() {
-      if(this.secondsLeft === 0) {
-         browserHistory.push('/rejected')
+         this.props.onTimeFinished();
       }
    },
    componentWillReceiveProps: function(nextProps){
@@ -69,8 +59,7 @@ var Timer = React.createClass({
    render: function(){
       return   (
          <div>
-            <span>{this.minutesLeft()}</span>:<span>{this.displayZero()}</span><span>{this.secondsLeft()}</span>
-            {this.rejectApplicant()}
+            <span>{this.minutesLeft()}</span>:<span>{this.displayZero()}</span><span >{this.secondsLeft()}</span>
          </div>
       );
    }

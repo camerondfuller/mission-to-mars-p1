@@ -24736,9 +24736,10 @@
 	      return {
 	         started: false,
 	         currentQuestion: 1,
-	         answerCount: 0,
+	         rightAnswers: 0,
+	         wrongAnswers: 0,
 	         userAnswer: '',
-	         wrongAnswers: 0
+	         value: ''
 	      };
 	   },
 	   hidden: function hidden(notHidden) {
@@ -24748,12 +24749,12 @@
 	         return "";
 	      }
 	   },
-	   results: function results() {
-	      if (this.state.answerCount === 3) {
-	         _reactRouter.browserHistory.push('./success');
+	   componentDidUpdate: function componentDidUpdate() {
+	      if (this.state.rightAnswers === 3) {
+	         _reactRouter.browserHistory.push('/success');
 	      };
 	      if (this.state.wrongAnswers === 3) {
-	         _reactRouter.browserHistory.push('./rejected');
+	         _reactRouter.browserHistory.push('/rejected');
 	      }
 	   },
 	   handleClick: function handleClick() {
@@ -24783,15 +24784,20 @@
 	         )
 	      );
 	   },
-	   matchAnswer: function matchAnswer(event) {
+	   onMatchAnswer: function onMatchAnswer(event) {
 	      if (this.state.userAnswer === questionList.questions[this.state.currentQuestion].answer) {
 	         event.preventDefault();
-	         this.setState({ answerCount: this.state.answerCount + 1 });
+	         this.setState({ rightAnswers: this.state.rightAnswers + 1 });
 	      } else {
 	         this.setState({ wrongAnswers: this.state.wrongAnswers + 1 });
 	      };
 	      this.handleSubmit(event);
+	      this.refs.reset.value = '';
 	   },
+	   onTimeFinished: function onTimeFinished() {
+	      _reactRouter.browserHistory.push('/rejected');
+	   },
+
 	   render: function render() {
 	      return React.createElement(
 	         'div',
@@ -24799,22 +24805,29 @@
 	         React.createElement(
 	            'div',
 	            { className: "timer " + this.hidden(true) },
-	            React.createElement(_countdownClock2.default, { startMinutes: 1, startHandler: this.state.started })
+	            React.createElement(_countdownClock2.default, { startMinutes: 1,
+	               startHandler: this.state.started,
+	               onTimeFinished: this.onTimeFinished })
 	         ),
 	         React.createElement(
 	            'button',
-	            { type: 'button', className: 'start-btn ' + this.hidden(false), onClick: this.handleClick },
+	            { type: 'button',
+	               className: 'start-btn ' + this.hidden(false),
+	               onClick: this.handleClick },
 	            'begin evaluation'
 	         ),
 	         React.createElement(
 	            'div',
 	            { className: 'question-box' + this.hidden(true) },
 	            this.renderQuestion(),
-	            this.results(),
 	            React.createElement(
 	               'form',
-	               { onSubmit: (this.handleSubmit, this.matchAnswer) },
-	               React.createElement('input', { className: this.hidden(true), type: 'text', placeholder: 'Your Answer', onChange: this.updateUserAnswer })
+	               { onSubmit: this.onMatchAnswer },
+	               React.createElement('input', { className: this.hidden(true),
+	                  ref: 'reset',
+	                  type: 'text',
+	                  placeholder: 'Your Answer',
+	                  onChange: this.updateUserAnswer })
 	            )
 	         )
 	      );
@@ -24878,24 +24891,24 @@
 	         return 60;
 	      }
 	   },
-	   secondsLeft: function secondsLeft() {
-	      return Math.floor(this.state.secondsElapsed % 60);
-	   },
-	   stopTimer: function stopTimer() {
-	      clearInterval(this.interval);
-	   },
-	   tick: function tick() {
-	      this.setState({ secondsElapsed: this.state.secondsElapsed - 1 });
-	      if (this.state.secondsElapsed === 0) {
-	         this.stopTimer();
-	      }
-	   },
 	   minutesLeft: function minutesLeft() {
 	      return Math.floor(this.state.secondsElapsed / 60);
 	   },
+	   secondsLeft: function secondsLeft() {
+	      return Math.floor(this.state.secondsElapsed % 60);
+	   },
+	   componentWillUnmount: function componentWillUnmount() {
+	      clearInterval(this.interval);
+	   },
+	   _decrementByOne: function _decrementByOne() {
+	      this.setState({ secondsElapsed: this.state.secondsElapsed - 1 });
+	      if (this.state.secondsElapsed === 0) {
+	         this.componentWillUnmount();
+	      }
+	   },
 	   start: function start() {
 	      if (!this.interval) {
-	         this.interval = setInterval(this.tick, 1000);
+	         this.interval = setInterval(this._decrementByOne, 1000);
 	      }
 	   },
 	   displayZero: function displayZero() {
@@ -24905,19 +24918,9 @@
 	         return;
 	      }
 	   },
-	   rejectApplicant: function rejectApplicant() {
+	   componentWillUpdate: function componentWillUpdate(prevProps, prevState) {
 	      if (this.state.secondsElapsed === 0) {
-	         _reactRouter.browserHistory.push('/rejected');
-	      }
-	   },
-	   changeToRed: function changeToRed() {
-	      if (this.state.secondsElapsed < 10) {
-	         // change color to red.
-	      }
-	   },
-	   timerEnds: function timerEnds() {
-	      if (this.secondsLeft === 0) {
-	         _reactRouter.browserHistory.push('/rejected');
+	         this.props.onTimeFinished();
 	      }
 	   },
 	   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -24944,8 +24947,7 @@
 	            'span',
 	            null,
 	            this.secondsLeft()
-	         ),
-	         this.rejectApplicant()
+	         )
 	      );
 	   }
 
@@ -25069,15 +25071,10 @@
 	         { className: 'body mars center-child' },
 	         React.createElement(
 	            'div',
-	            null,
-	            React.createElement('i', { className: 'fa fa-space-shuttle takeoff' }),
-	            React.createElement('i', { className: 'fa fa-fire fire fire2 takeoff' })
-	         ),
-	         React.createElement(
-	            'div',
 	            { className: 'success' },
 	            'success!!!'
-	         )
+	         ),
+	         React.createElement('i', { className: 'fa fa-space-shuttle takeoff' })
 	      );
 	   }
 	});
