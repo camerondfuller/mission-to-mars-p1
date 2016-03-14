@@ -24726,108 +24726,6 @@
 	var React = __webpack_require__(24);
 
 
-	var Body = React.createClass({
-	   displayName: 'Body',
-
-
-	   getInitialState: function getInitialState() {
-	      return {
-	         started: false,
-	         currentQuestion: 1,
-	         rightAnswers: 0,
-	         userAnswer: '',
-	         value: ''
-	      };
-	   },
-	   hidden: function hidden(notHidden) {
-	      if (this.state.started !== notHidden) {
-	         return "hidden";
-	      } else {
-	         return "";
-	      }
-	   },
-	   componentDidUpdate: function componentDidUpdate() {
-	      if (this.state.rightAnswers === 3) {
-	         _reactRouter.browserHistory.push('/success');
-	      };
-	      if (this.state.currentQuestion > 3 && this.state.rightAnswers != 3) {
-	         _reactRouter.browserHistory.push('/rejected');
-	      };
-	   },
-	   handleClick: function handleClick() {
-	      this.setState({ started: true });
-	   },
-	   handleSubmit: function handleSubmit(event) {
-	      event.preventDefault();
-	      this.setState({ currentQuestion: this.state.currentQuestion + 1 });
-	   },
-	   updateUserAnswer: function updateUserAnswer(e) {
-	      this.setState({ userAnswer: e.target.value });
-	   },
-	   renderQuestion: function renderQuestion() {
-	      return React.createElement(
-	         'div',
-	         null,
-	         React.createElement(
-	            'div',
-	            { className: this.hidden(true) },
-	            'question ',
-	            questionList.questions[this.state.currentQuestion].number
-	         ),
-	         React.createElement(
-	            'div',
-	            { className: this.hidden(true) },
-	            questionList.questions[this.state.currentQuestion].text
-	         )
-	      );
-	   },
-	   onMatchAnswer: function onMatchAnswer(event) {
-	      if (this.state.userAnswer === questionList.questions[this.state.currentQuestion].answer) {
-	         event.preventDefault();
-	         this.setState({ rightAnswers: this.state.rightAnswers + 1 });
-	      } else {
-	         this.setState({ wrongAnswers: this.state.wrongAnswers + 1 });
-	      };
-	      this.handleSubmit(event);
-	      this.refs.reset.value = '';
-	   },
-	   render: function render() {
-	      return React.createElement(
-	         'div',
-	         { className: 'body mars center-child' },
-	         React.createElement(
-	            'div',
-	            { className: "timer " + this.hidden(true) },
-	            React.createElement(_countdownClock2.default, { startMinutes: 1,
-	               startHandler: this.state.started,
-	               onTimeFinished: this.onTimeFinished })
-	         ),
-	         React.createElement(
-	            'button',
-	            { type: 'button',
-	               className: 'start-btn ' + this.hidden(false),
-	               onClick: this.handleClick },
-	            'begin evaluation'
-	         ),
-	         React.createElement(
-	            'div',
-	            { className: 'question-box' + this.hidden(true) },
-	            this.renderQuestion(),
-	            React.createElement(
-	               'form',
-	               { name: 'questionForm', onSubmit: this.onMatchAnswer },
-	               React.createElement('input', { className: this.hidden(true),
-	                  name: 'text-area',
-	                  ref: 'reset',
-	                  type: 'text',
-	                  placeholder: 'Your Answer',
-	                  onChange: this.updateUserAnswer })
-	            )
-	         )
-	      );
-	   }
-	});
-
 	var questionList = {
 	   questions: {
 	      1: {
@@ -24854,6 +24752,97 @@
 	   }
 	};
 
+	var Body = React.createClass({
+	   displayName: 'Body',
+
+
+	   getInitialState: function getInitialState() {
+	      return {
+	         currentQuestion: 1,
+	         rightAnswers: 0,
+	         inputHidden: true
+	      };
+	   },
+	   hidden: function hidden(isHidden) {
+	      if (this.state.inputHidden === isHidden) {
+	         return "hidden";
+	      } else {
+	         return "";
+	      }
+	   },
+	   componentDidUpdate: function componentDidUpdate() {
+	      if (this.state.rightAnswers === 3) {
+	         _reactRouter.browserHistory.push('/success');
+	      };
+	      if (this.state.currentQuestion > 3 && this.state.rightAnswers != 3) {
+	         _reactRouter.browserHistory.push('/rejected');
+	      };
+	   },
+	   handleClick: function handleClick() {
+	      this.setState({ inputHidden: false });
+	   },
+	   handleSubmit: function handleSubmit(event) {
+	      event.preventDefault();
+	      this.setState({ currentQuestion: this.state.currentQuestion + 1 });
+	   },
+	   onMatchAnswer: function onMatchAnswer(event) {
+	      if (this.refs.userInput.value.toLowerCase() === questionList.questions[this.state.currentQuestion].answer.toLowerCase()) {
+	         event.preventDefault();
+	         this.setState({ rightAnswers: this.state.rightAnswers + 1 });
+	      };
+	      this.handleSubmit(event);
+	      this.refs.userInput.value = '';
+	   },
+	   render: function render() {
+	      return React.createElement(
+	         'div',
+	         { className: 'body mars center-child' },
+	         React.createElement(
+	            'div',
+	            { className: "timer " + this.hidden(true) },
+	            React.createElement(_countdownClock2.default, { startMinutes: 1,
+	               startHandler: !this.state.inputHidden })
+	         ),
+	         React.createElement(
+	            'button',
+	            { type: 'button',
+	               className: 'start-btn ' + this.hidden(false),
+	               onClick: this.handleClick },
+	            'begin evaluation'
+	         ),
+	         React.createElement(
+	            'div',
+	            { className: 'question-box' + this.hidden(true) },
+	            React.createElement(
+	               'div',
+	               null,
+	               React.createElement(
+	                  'div',
+	                  { className: this.hidden(true) },
+	                  'question',
+	                  questionList.questions[this.state.currentQuestion].number
+	               ),
+	               React.createElement(
+	                  'div',
+	                  { className: this.hidden(true) },
+	                  questionList.questions[this.state.currentQuestion].text
+	               )
+	            ),
+	            !this.state.inputHidden && React.createElement(
+	               'form',
+	               { name: 'questionForm', onSubmit: this.onMatchAnswer },
+	               React.createElement('input', {
+	                  name: 'text-area',
+	                  autoFocus: true,
+	                  ref: 'userInput',
+	                  type: 'text',
+	                  placeholder: 'Your Answer' })
+	            )
+	         )
+	      );
+	   }
+	});
+
 	module.exports = Body;
 
 /***/ },
@@ -24872,10 +24861,9 @@
 
 
 	   getInitialState: function getInitialState() {
-	      var seconds = this.getSeconds();
 
 	      return {
-	         secondsElapsed: seconds
+	         secondsElapsed: this.getSeconds()
 	      };
 	   },
 	   getSeconds: function getSeconds() {
@@ -24906,7 +24894,7 @@
 	      }
 	   },
 	   displayZero: function displayZero() {
-	      if (this.state.secondsElapsed === 60 || this.state.secondsElapsed < 10) {
+	      if (this.state.secondsElapsed % 60 === 0 || this.state.secondsElapsed < 10) {
 	         return '0';
 	      } else {
 	         return;
@@ -24917,8 +24905,8 @@
 	         _reactRouter.browserHistory.push('/rejected');
 	      }
 	   },
-	   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.startHandler === true) {
+	   componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	      if (newProps.startHandler === true) {
 	         this.start();
 	      };
 	   },

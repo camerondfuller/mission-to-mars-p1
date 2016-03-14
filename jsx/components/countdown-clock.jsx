@@ -6,10 +6,10 @@ import {browserHistory} from 'react-router';
 var Timer = React.createClass({
 
    getInitialState: function(){
-      var seconds = this.getSeconds();
+
 
       return {
-         secondsElapsed: seconds,
+         secondsElapsed: this.getSeconds(),
       };
    },
    getSeconds: function() {
@@ -40,7 +40,7 @@ var Timer = React.createClass({
       }
    },
    displayZero: function() {
-      if(this.state.secondsElapsed === 60 || this.state.secondsElapsed < 10) {
+      if(this.state.secondsElapsed%60 === 0 || this.state.secondsElapsed < 10) {
          return '0';
       } else {
          return ;
@@ -51,8 +51,8 @@ var Timer = React.createClass({
          browserHistory.push('/rejected');
       }
    },
-   componentWillReceiveProps: function(nextProps){
-      if (nextProps.startHandler === true) {
+   componentWillReceiveProps: function(newProps){
+      if (newProps.startHandler === true) {
          this.start();
       };
    },

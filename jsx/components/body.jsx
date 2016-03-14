@@ -3,93 +3,6 @@ import {browserHistory} from 'react-router';
 
 import Timer from './countdown-clock.jsx';
 
-var Body = React.createClass({
-
-   getInitialState: function() {
-      return {
-         started: false,
-         currentQuestion: 1,
-         rightAnswers: 0,
-         userAnswer: '',
-         value: ''
-      };
-   },
-   hidden: function(notHidden) {
-      if(this.state.started !== notHidden) {
-         return "hidden"
-      } else {
-         return ""
-      }
-   },
-   componentDidUpdate:function() {
-      if(this.state.rightAnswers === 3) {
-         browserHistory.push('/success');
-      };
-      if(this.state.currentQuestion > 3 && this.state.rightAnswers != 3) {
-         browserHistory.push('/rejected');
-      };
-   },
-   handleClick: function() {
-      this.setState({ started: true });
-   },
-   handleSubmit: function(event) {
-      event.preventDefault();
-      this.setState({currentQuestion: this.state.currentQuestion + 1});
-   },
-   updateUserAnswer: function(e) {
-      this.setState({userAnswer: e.target.value});
-   },
-   renderQuestion: function() {
-      return (
-         <div>
-            <div className={this.hidden(true)}>question {questionList.questions[this.state.currentQuestion].number}</div>
-            <div className={this.hidden(true)}>{questionList.questions[this.state.currentQuestion].text}</div>
-         </div>
-      )
-   },
-   onMatchAnswer: function(event) {
-      if(this.state.userAnswer === questionList.questions[this.state.currentQuestion].answer) {
-         event.preventDefault();
-         this.setState({rightAnswers: this.state.rightAnswers + 1});
-      } else {
-         this.setState({wrongAnswers: this.state.wrongAnswers + 1});
-      };
-      this.handleSubmit(event);
-      this.refs.reset.value='';
-
-   },
-   render: function() {
-      return (
-         <div className="body mars center-child">
-            <div className={"timer "+this.hidden(true)}>
-               <Timer   startMinutes={1}
-                        startHandler={this.state.started}
-                        onTimeFinished={this.onTimeFinished}/>
-            </div>
-            <button  type="button"
-                     className={'start-btn '+this.hidden(false)}
-                     onClick={this.handleClick}>
-                     begin evaluation
-            </button>
-
-            <div className={'question-box'+this.hidden(true)}>
-
-               {this.renderQuestion()}
-
-               <form name="questionForm" onSubmit={this.onMatchAnswer}>
-                  <input   className={this.hidden(true)}
-                           name="text-area"
-                           ref="reset"
-                           type="text"
-                           placeholder="Your Answer"
-                           onChange={this.updateUserAnswer}>
-                  </input>
-               </form>
-            </div>
-         </div>
-      );
-   },
-});
 
 var questionList = {
    questions:{
@@ -116,5 +29,88 @@ var questionList = {
       }
    }
 };
+
+var Body = React.createClass({
+
+   getInitialState: function() {
+      return {
+         currentQuestion: 1,
+         rightAnswers: 0,
+         inputHidden: true
+      };
+   },
+   hidden: function(isHidden) {
+      if(this.state.inputHidden === isHidden) {
+         return "hidden"
+      } else {
+         return ""
+      }
+   },
+   componentDidUpdate:function() {
+      if(this.state.rightAnswers === 3) {
+         browserHistory.push('/success');
+      };
+      if(this.state.currentQuestion > 3 && this.state.rightAnswers != 3) {
+         browserHistory.push('/rejected');
+      };
+   },
+   handleClick: function() {
+      this.setState({ inputHidden:false });
+   },
+   handleSubmit: function(event) {
+      event.preventDefault();
+      this.setState({currentQuestion: this.state.currentQuestion + 1});
+   },
+   onMatchAnswer: function(event) {
+      if(this.refs.userInput.value.toLowerCase() === questionList.questions[this.state.currentQuestion].answer.toLowerCase()) {
+         event.preventDefault();
+         this.setState({rightAnswers: this.state.rightAnswers + 1});
+      };
+      this.handleSubmit(event);
+      this.refs.userInput.value='';
+   },
+   render: function() {
+      return (
+         <div className="body mars center-child">
+
+            <div className={"timer "+this.hidden(true)}>
+               <Timer   startMinutes={1}
+                        startHandler={!this.state.inputHidden}/>
+            </div>
+
+            <button  type="button"
+                     className={'start-btn '+this.hidden(false)}
+                     onClick={this.handleClick}>
+                     begin evaluation
+            </button>
+{/*This section renders the question box with dynamic answers*/}
+            <div className={'question-box'+this.hidden(true)}>
+
+               <div>
+                  <div className={this.hidden(true)}>
+                     question
+                     {questionList.questions[this.state.currentQuestion].number}
+                  </div>
+                  <div className={this.hidden(true)}>
+                     {questionList.questions[this.state.currentQuestion].text}
+                  </div>
+               </div>
+
+               {!this.state.inputHidden &&
+                  <form name="questionForm" onSubmit={this.onMatchAnswer}>
+                     <input
+                        name="text-area"
+                        autoFocus={true}
+                        ref="userInput"
+                        type="text"
+                        placeholder="Your Answer">
+                     </input>
+                  </form>
+               }
+            </div>
+         </div>
+      );
+   },
+});
 
 module.exports = Body;
