@@ -103,7 +103,8 @@ var Body = React.createClass({
                         autoFocus={true}
                         ref="userInput"
                         type="text"
-                        placeholder="Your Answer">
+                        placeholder="Your Answer"
+                        required>
                      </input>
                   </form>
                }

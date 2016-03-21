@@ -6,8 +6,6 @@ import {browserHistory} from 'react-router';
 var Timer = React.createClass({
 
    getInitialState: function(){
-
-
       return {
          secondsElapsed: this.getSeconds(),
       };
@@ -34,7 +32,7 @@ var Timer = React.createClass({
          this.componentWillUnmount();
       }
    },
-   start:function (){
+   start: function(){
       if(!this.interval) {
          this.interval = setInterval(this._decrementByOne, 1000);
       }
